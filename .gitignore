@@ -137,3 +137,8 @@ dist
 __pycache__/
 .venv/
 
+# Docker
+## workspace下に置いたソースをコミットしないようにする
+workspace/*
+!workspace/README.md
+
