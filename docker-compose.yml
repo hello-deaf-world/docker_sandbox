@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  dev_nodejs:
+    build:
+      context: .
+      dockerfile: ./docker/dev_nodejs/Dockerfile
+      args:
+        APPNAME: ${APPNAME}
+        SHARED_WORKSPACE_HOST: ${SHARED_WORKSPACE_HOST}
+        SHARED_WORKSPACE_CONTAINER: ${SHARED_WORKSPACE_CONTAINER}
+        # DOCKER_TOOLS_HOST: ${DOCKER_TOOLS_HOST}
+        NODE_VERSION: ${NODE_VERSION}
+    image: ${APPNAME}
+    container_name: ${APPNAME}
+    ports:
+      # フロントエンドlocalhost用
+      - 8001:8001
+      # Storybook用
+      - 8106:8106
+    volumes:
+      - ./${SHARED_WORKSPACE_HOST}:${SHARED_WORKSPACE_CONTAINER}
+    tty: true
